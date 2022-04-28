@@ -8,7 +8,7 @@
 import UIKit
 import Lottie
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class ViewController: UIViewController, UITextFieldDelegate, CAAnimationDelegate {
     
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var animationView: AnimationView!
@@ -64,12 +64,25 @@ class ViewController: UIViewController, UITextFieldDelegate {
         playAnimation()
         
         getStartedButton.addTarget(self, action: #selector(getStartedClicked), for: .touchUpInside)
+        registerButton.addTarget(self, action: #selector(registerClicked), for: .touchUpInside)
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        UIView.animate(withDuration: 1.0) {
+        UIView.animate(withDuration: 0.5) {
             self.stackView.alpha = 1.0
         }
+    }
+    
+    @objc func registerClicked(_ sender: UIButton) {
+        print("REGISTER PRESSED")
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let collectionViewController = storyBoard.instantiateViewController(withIdentifier: "CollectionViewController") as! CollectionViewController
+        //collectionViewController.modalPresentationStyle = .fullScreen
+        
+        self.navigationController?.pushViewController(collectionViewController, animated: true)
+                
+        
     }
     
     @objc func getStartedClicked(_ sender: UIButton) {
