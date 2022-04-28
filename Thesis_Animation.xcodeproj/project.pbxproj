@@ -56,7 +56,6 @@
 				62ECEDC4C6928F62FF73DB17 /* Pods-Thesis_Animation.debug.xcconfig */,
 				1D9FE60FA409572FE122B938 /* Pods-Thesis_Animation.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
