@@ -12,8 +12,10 @@ class ViewController: UIViewController, UITextFieldDelegate, CAAnimationDelegate
     
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var animationView: AnimationView!
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     @IBOutlet var mainBackground: UIView!
-    @IBOutlet weak var titleLabel: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var getStartedViewBox: UIView!
     @IBOutlet weak var getStartedButton: UIButton!
     @IBOutlet weak var getStartedStackView: UIStackView!
@@ -25,6 +27,9 @@ class ViewController: UIViewController, UITextFieldDelegate, CAAnimationDelegate
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var registerButton: UIButton!
     
+    let labelArray = [UILabel]()
+
+    
     
     func setBackgroundColor() {
         mainBackground.backgroundColor = UIColor(red: 145/255, green: 203/255, blue: 250/255, alpha: 1.0)
@@ -32,6 +37,8 @@ class ViewController: UIViewController, UITextFieldDelegate, CAAnimationDelegate
         animationView.backgroundColor = UIColor(red: 145/255, green: 203/255, blue: 250/255, alpha: 1.0)
         
         titleLabel.backgroundColor = UIColor(red: 145/255, green: 203/255, blue: 250/255, alpha: 1.0)
+        
+        collectionView.backgroundColor = UIColor(red: 145/255, green: 203/255, blue: 250/255, alpha: 1.0)
     }
     
     func setInitialView() {
@@ -58,6 +65,8 @@ class ViewController: UIViewController, UITextFieldDelegate, CAAnimationDelegate
         fullNameTextField.delegate = self
         mailTextField.delegate = self
         passwordTextField.delegate = self
+        collectionView.delegate = self
+        collectionView.dataSource = self
         
         setInitialView()
         setBackgroundColor()
@@ -65,6 +74,9 @@ class ViewController: UIViewController, UITextFieldDelegate, CAAnimationDelegate
         
         getStartedButton.addTarget(self, action: #selector(getStartedClicked), for: .touchUpInside)
         registerButton.addTarget(self, action: #selector(registerClicked), for: .touchUpInside)
+        
+        collectionView.collectionViewLayout = UICollectionViewFlowLayout()
+
 
     }
     
@@ -76,13 +88,17 @@ class ViewController: UIViewController, UITextFieldDelegate, CAAnimationDelegate
     
     @objc func registerClicked(_ sender: UIButton) {
         print("REGISTER PRESSED")
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let collectionViewController = storyBoard.instantiateViewController(withIdentifier: "CollectionViewController") as! CollectionViewController
-        //collectionViewController.modalPresentationStyle = .fullScreen
         
-        self.navigationController?.pushViewController(collectionViewController, animated: true)
-                
+        stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+
         
+        
+        UIView.animate(withDuration:0.6, animations: {
+            self.getStartedViewBox.removeFromSuperview()
+            self.collectionView.isHidden = false
+            
+        })
+
     }
     
     @objc func getStartedClicked(_ sender: UIButton) {
@@ -130,4 +146,45 @@ class ViewController: UIViewController, UITextFieldDelegate, CAAnimationDelegate
     }
 
 }
+
+
+extension UIViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 20
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "movie_cell", for: indexPath) as! CollectionViewCell
+        cell.cellLabel.text = ""
+        cell.cellLabel.backgroundColor = .random()
+            
+        return cell
+    }
+}
+
+extension ViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 155, height: 200)
+    }
+    
+}
+
+
+extension CGFloat {
+    static func random() -> CGFloat {
+        return CGFloat(arc4random()) / CGFloat(UInt32.max)
+    }
+}
+
+extension UIColor {
+    static func random() -> UIColor {
+        return UIColor(
+           red:   .random(),
+           green: .random(),
+           blue:  .random(),
+           alpha: 1.0
+        )
+    }
+}
+
 
