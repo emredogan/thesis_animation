@@ -8,7 +8,7 @@
 import UIKit
 import Lottie
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var animationView: AnimationView!
@@ -28,6 +28,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fullNameTextField.delegate = self
+        mailTextField.delegate = self
+        passwordTextField.delegate = self
         self.stackView.alpha = 0.0
         fullNameTextField.isHidden = true
         mailTextField.isHidden = true
@@ -91,6 +94,23 @@ class ViewController: UIViewController {
         view.layer.shadowOffset = .zero
         view.layer.shadowRadius = 10
         view.layer.cornerRadius = 10
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        let bottomLine = CALayer()
+        bottomLine.frame = CGRect(x: 0.0, y: textField.frame.height, width: textField.frame.width, height: CGFloat(1))
+        bottomLine.backgroundColor = UIColor.systemBlue.cgColor
+        textField.borderStyle = UITextField.BorderStyle.none
+        textField.layer.addSublayer(bottomLine)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.layer.sublayers = nil
+        let bottomLine = CALayer()
+        bottomLine.backgroundColor = UIColor.lightGray.cgColor
+        textField.borderStyle = UITextField.BorderStyle.roundedRect
+        textField.layer.addSublayer(bottomLine)
+        
     }
     
     
