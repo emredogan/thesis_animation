@@ -102,12 +102,14 @@ class ViewController: UIViewController, UITextFieldDelegate, CAAnimationDelegate
     }
     
     @objc func getStartedClicked(_ sender: UIButton) {
+        
         self.fullNameTextField.isHidden = false
         self.mailTextField.isHidden = false
         self.passwordTextField.isHidden = false
         self.registerButton.isHidden = false
         
         UIView.animate(withDuration: 0.5, animations: {
+
             self.animationView.isHidden = true
             self.getStartedSubtitle.removeFromSuperview()
             self.getStartedButton.removeFromSuperview()
@@ -115,9 +117,14 @@ class ViewController: UIViewController, UITextFieldDelegate, CAAnimationDelegate
             self.getStartedViewBox.transform = CGAffineTransform(scaleX: 1, y: 1)
             
             self.getStartedStackView.distribution = .fillEqually
-            self.getStartedStackView.spacing = 33
+            self.getStartedStackView.spacing = 20
+
+
             
         })
+        
+        self.getStartedViewBox.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 22).isActive = true
+
     }
     
     func addRoundShadow(view: UIView) {

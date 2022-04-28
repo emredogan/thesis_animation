@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="33" translatesAutoresizingMaskIntoConstraints="NO" id="XZJ-dv-N8N">
-                                <rect key="frame" x="0.0" y="184" width="414" height="643"/>
+                                <rect key="frame" x="0.0" y="174" width="414" height="653"/>
                                 <subviews>
                                     <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="iNN-in-k2M">
                                         <rect key="frame" x="20" y="-400" width="374" height="400"/>
@@ -65,11 +65,11 @@
                                         </cells>
                                     </collectionView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d02-4x-xZw" customClass="AnimationView" customModule="Lottie">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="385"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="395"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RKo-fb-05C">
-                                        <rect key="frame" x="7.5" y="418" width="399.5" height="225"/>
+                                        <rect key="frame" x="7.5" y="428" width="399.5" height="225"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Tj1-KA-yxE">
                                                 <rect key="frame" x="11" y="0.0" width="377.5" height="205"/>
@@ -165,7 +165,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="XZJ-dv-N8N" firstAttribute="top" secondItem="RJZ-4b-FuB" secondAttribute="bottom" constant="10" id="GcM-uK-dRH"/>
+                            <constraint firstItem="XZJ-dv-N8N" firstAttribute="top" secondItem="RJZ-4b-FuB" secondAttribute="bottom" id="GcM-uK-dRH"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XZJ-dv-N8N" secondAttribute="trailing" id="M8v-Bm-B01"/>
                             <constraint firstItem="XZJ-dv-N8N" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Tkq-y1-RWd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="XZJ-dv-N8N" secondAttribute="bottom" constant="35" id="hh7-Ob-73r"/>
@@ -193,6 +193,9 @@
             <point key="canvasLocation" x="939.13043478260875" y="83.705357142857139"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="d02-4x-xZw"/>
+    </designables>
     <resources>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
