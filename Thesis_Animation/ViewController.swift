@@ -26,37 +26,44 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var registerButton: UIButton!
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        fullNameTextField.delegate = self
-        mailTextField.delegate = self
-        passwordTextField.delegate = self
+    func setBackgroundColor() {
+        mainBackground.backgroundColor = UIColor(red: 145/255, green: 203/255, blue: 250/255, alpha: 1.0)
+        
+        animationView.backgroundColor = UIColor(red: 145/255, green: 203/255, blue: 250/255, alpha: 1.0)
+        
+        titleLabel.backgroundColor = UIColor(red: 145/255, green: 203/255, blue: 250/255, alpha: 1.0)
+    }
+    
+    func setInitialView() {
         self.stackView.alpha = 0.0
         fullNameTextField.isHidden = true
         mailTextField.isHidden = true
         passwordTextField.isHidden = true
         registerButton.isHidden = true
         
-        mainBackground.backgroundColor = UIColor(red: 145/255, green: 203/255, blue: 250/255, alpha: 1.0)
-        
-        animationView.backgroundColor = UIColor(red: 145/255, green: 203/255, blue: 250/255, alpha: 1.0)
-        
-        titleLabel.backgroundColor = UIColor(red: 145/255, green: 203/255, blue: 250/255, alpha: 1.0)
-        
-        
+        addRoundShadow(view: getStartedViewBox)
+        addRoundShadow(view: getStartedButton)
+        addRoundShadow(view: registerButton)
+    }
+    
+    func playAnimation() {
         let animation = Animation.named("movie")
         animationView.animation = animation
         animationView.loopMode = .loop
         animationView.play()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        fullNameTextField.delegate = self
+        mailTextField.delegate = self
+        passwordTextField.delegate = self
         
-        addRoundShadow(view: getStartedViewBox)
-        addRoundShadow(view: getStartedButton)
-        addRoundShadow(view: registerButton)
+        setInitialView()
+        setBackgroundColor()
+        playAnimation()
         
         getStartedButton.addTarget(self, action: #selector(getStartedClicked), for: .touchUpInside)
-        
-        
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -80,10 +87,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
             self.getStartedStackView.distribution = .fillEqually
             self.getStartedStackView.spacing = 33
-            
-            
-            
-            
             
         })
     }
@@ -112,10 +115,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         textField.layer.addSublayer(bottomLine)
         
     }
-    
-    
-    
-    
-    
+
 }
 
