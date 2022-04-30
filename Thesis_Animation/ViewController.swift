@@ -53,11 +53,29 @@ class ViewController: UIViewController, UITextFieldDelegate, CAAnimationDelegate
         addRoundShadow(view: registerButton)
     }
     
-    func playAnimation() {
-        let animation = Animation.named("movie")
+    func playAnimation(name: String, shouldLoop: Bool) {
+        let animation = Animation.named(name)
+        animationView.isHidden = false
         animationView.animation = animation
-        animationView.loopMode = .loop
-        animationView.play()
+        if(shouldLoop) {
+            animationView.loopMode = .loop
+
+        } else {
+            animationView.loopMode = .playOnce
+        }
+        animationView.play { (finished) in
+            if(!shouldLoop) {
+                self.animationView.isHidden = true
+
+                
+                UIView.animate(withDuration:0.6, animations: {
+                    self.collectionView.isHidden = false
+                    
+                })
+            }
+        }
+        
+        
     }
     
     override func viewDidLoad() {
@@ -70,7 +88,7 @@ class ViewController: UIViewController, UITextFieldDelegate, CAAnimationDelegate
         
         setInitialView()
         setBackgroundColor()
-        playAnimation()
+        playAnimation(name: "movie", shouldLoop: true)
         
         getStartedButton.addTarget(self, action: #selector(getStartedClicked), for: .touchUpInside)
         registerButton.addTarget(self, action: #selector(registerClicked), for: .touchUpInside)
@@ -88,16 +106,22 @@ class ViewController: UIViewController, UITextFieldDelegate, CAAnimationDelegate
     
     @objc func registerClicked(_ sender: UIButton) {
         print("REGISTER PRESSED")
+        getStartedViewBox.removeFromSuperview()
+
+
         
-        stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        animationView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        animationView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        animationView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        animationView.widthAnchor.constraint(equalToConstant: 200).isActive = true
+
+
+        animationView.isHidden = false
+        playAnimation(name: "success", shouldLoop: false)
+        
 
         
         
-        UIView.animate(withDuration:0.6, animations: {
-            self.getStartedViewBox.removeFromSuperview()
-            self.collectionView.isHidden = false
-            
-        })
 
     }
     
